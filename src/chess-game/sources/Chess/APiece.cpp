@@ -1,6 +1,7 @@
 #include "pch.h"
 
-APiece::APiece()
+
+APiece::APiece(const std::type_info& type_info) : m_type(type_info), m_color(PieceColor::NONE)
 {
 }
 

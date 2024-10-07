@@ -1,6 +1,6 @@
 #include "pch.h"
 
-Pawn::Pawn()
+Pawn::Pawn() : APiece(typeid(Pawn)), m_direction(EPawn::Direction::NONE)
 {
 }
 
@@ -10,11 +10,18 @@ Pawn::~Pawn()
 
 int Pawn::Initialize(PieceColor color)
 {
+	APiece::Initialize(color);
+	using namespace EPawn;
+	m_direction = (color == WHITE) ? Direction::UP : Direction::DOWN;
 	return 0;
 }
 
+void Pawn::Release()
+{
+}
+
 //----------------------------------------------------------------------------------------------------------------
-MovableType Pawn::IsMovable(const Board& board, int start_position[2], int destination_position[2])
+MovableType Pawn::IsMovable(const Board& board, int start_position[2], int destination_position[2]) const
 {
 	//------------------------------------------------------------------------------------------------------------
 	/** Checks if the piece is not under a discovered attack. */
@@ -34,7 +41,13 @@ MovableType Pawn::IsMovable(const Board& board, int start_position[2], int desti
 	/** VERTICAL MOVE CHECK */
 	const bool is_vertical_move_only = start_column == destination_column;
 	if (is_vertical_move_only) [[likely]] {
-		const bool is_vertical_movable = IsVerticalMovable(grid, start_column, start_row, destination_row, destination_index);
+		const bool is_vertical_movable = IsVerticalMovable(
+			grid, 
+			start_column, 
+			start_row, 
+			destination_row, 
+			destination_index
+		);
 		if (is_vertical_movable) return MovableType::MOVE;
 	}
 	//------------------------------------------------------------------------------------------------------------
@@ -45,7 +58,13 @@ MovableType Pawn::IsMovable(const Board& board, int start_position[2], int desti
 		//--------------------------------------------------------------------------------------------------------
 		/** NORMAL CAPTURE MOVE CHECK */
 		if (is_destination_occupied) [[likely]] {
-			const bool is_capture_movable = IsCaptureMovable(*p_destination_square, start_column, start_row, destination_column, destination_row);
+			const bool is_capture_movable = IsCaptureMovable(
+				*p_destination_square, 
+				start_column, 
+				start_row, 
+				destination_column, 
+				destination_row
+			);
 			if (is_capture_movable) return MovableType::CAPTURE;
 		}
 		//--------------------------------------------------------------------------------------------------------
@@ -59,7 +78,7 @@ MovableType Pawn::IsMovable(const Board& board, int start_position[2], int desti
 }
 
 //----------------------------------------------------------------------------------------------------------------
-inline bool Pawn::IsVerticalMovable(const APiece* const grid[BOARD_SIZE], int start_column, int start_row, int destination_row, int destination_index)
+inline bool Pawn::IsVerticalMovable(const APiece* const grid[BOARD_SIZE], int start_column, int start_row, int destination_row, int destination_index) const
 {
 	const bool is_destination_occupied = grid[destination_index] != nullptr;
 	if (is_destination_occupied) return false;
@@ -81,7 +100,7 @@ inline bool Pawn::IsVerticalMovable(const APiece* const grid[BOARD_SIZE], int st
 /** 
 * @param target_piece - the piece to capture (must not be nullptr)
 */
-inline bool Pawn::IsCaptureMovable(const APiece& target_piece, int start_column, int start_row, int destination_column, int destination_row)
+inline bool Pawn::IsCaptureMovable(const APiece& target_piece, int start_column, int start_row, int destination_column, int destination_row) const
 {
 	//------------------------------------------------------------------------------------------------------------
 	/** Check capture move pattern. */
@@ -96,17 +115,17 @@ inline bool Pawn::IsCaptureMovable(const APiece& target_piece, int start_column,
 	/** Check piece at target position is capturable. */
 	if (IsSameColor(target_piece)) return false;
 
-	if (target_piece.Is<King>()) return false;
+	if (target_piece.IsType<King>()) return false;
 	return true;
 }
 
 //----------------------------------------------------------------------------------------------------------------
 // TODO: add a way to disable en passant if not used when available.
-inline bool Pawn::IsEnPassantMovable(const APiece* const grid[BOARD_SIZE], int start_column, int start_row, int destination_column)
+inline bool Pawn::IsEnPassantMovable(const APiece* const grid[BOARD_SIZE], int start_column, int start_row, int destination_column) const
 {
 	//------------------------------------------------------------------------------------------------------------
 	/** Check en passant move pattern. */
-	const bool en_passant_row_constraint = start_row == (m_direction == PawnDirection::DOWN) * BOARD_HEIGHT - m_direction * 4;
+	const bool en_passant_row_constraint = start_row == (m_direction == EPawn::Direction::DOWN) * BOARD_HEIGHT - m_direction * 4;
 	if (en_passant_row_constraint == false) return false;
 
 	const bool en_passant_horizontal_constraint = start_column + 1 == destination_column || start_column - 1 == destination_column;
@@ -120,6 +139,6 @@ inline bool Pawn::IsEnPassantMovable(const APiece* const grid[BOARD_SIZE], int s
 	const APiece& target_piece = *p_side_square;
 	if (IsSameColor(target_piece)) return false;
 
-	if (target_piece.Is<Pawn>()) return false;
+	if (target_piece.IsType<Pawn>()) return false;
 	return true;
 }

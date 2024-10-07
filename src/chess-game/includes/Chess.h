@@ -1,5 +1,11 @@
 #pragma once
 
+// External includes
+#include <typeinfo>
+
+// Type aliases
+using type_infoa = std::type_info;
+
 // Macros
 #define BOARD_WIDTH 8
 #define BOARD_HEIGHT 8
@@ -20,6 +26,7 @@ class Board;
 typedef enum PieceColors {
 	WHITE = 0,
 	BLACK = 1,
+	NONE,
 	PIECE_COLORS_COUNT
 } PieceColor;
 

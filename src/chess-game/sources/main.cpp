@@ -3,6 +3,12 @@
 
 int main()
 {
+
+	GameManager& gameManager = GameManager::instance();
+	gameManager.Initialize();
+	gameManager.Run();
+	gameManager.Release();
+
 #ifdef _DEBUG
 	_CrtDumpMemoryLeaks();
 #endif
