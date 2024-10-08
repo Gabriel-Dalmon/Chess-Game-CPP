@@ -20,6 +20,11 @@ private:
 
 	Board* m_board;
 	bool m_is_game_over;
-	static const std::unordered_map<std::type_index, char> s_pieces_display_map;
+	const std::unordered_map<std::type_index, char> m_pieces_display_map = {
+		{std::type_index(typeid(Pawn)), 'P'},
+		{std::type_index(typeid(Rook)), 'R'},
+		{std::type_index(typeid(Knight)), 'K'},
+		{std::type_index(typeid(Bishop)), 'B'}
+	};
 };
 

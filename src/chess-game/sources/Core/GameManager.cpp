@@ -1,12 +1,6 @@
 #include "pch.h"
 
 GameManager* GameManager::s_instance = nullptr;
-const std::unordered_map<std::type_index, char> GameManager::s_pieces_display_map = {
-	   {std::type_index(typeid(Pawn)), 'P'},
-	   {std::type_index(typeid(Rook)), 'R'},
-	   {std::type_index(typeid(Knight)), 'K'},
-	   {std::type_index(typeid(Bishop)), 'B'},
-};
 
 GameManager& GameManager::instance()
 {
@@ -134,7 +128,7 @@ void GameManager::DrawBoard()
 			}
 			else
 			{
-				char piece_display = s_pieces_display_map.at(std::type_index(p_piece->GetType()));
+				char piece_display = 'P';//s_pieces_display_map.at(std::type_index(p_piece->GetType()));
 				const char* color = p_piece->GetColor() == PieceColor::WHITE ? green_color : purple_color;
 				std::cout << color << piece_display << reset_color;
 			}
