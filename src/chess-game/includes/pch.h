@@ -9,10 +9,11 @@
 #ifdef _DEBUG
 #define RESOURCES_PATH "../../../res/"
 #else
-#define RESOURCES_PATH("./")
+#define RESOURCES_PATH "./"
 #endif
 
 // Includes
 #include "Utilities.h"
+#include "Graphics.h"
 #include "Chess.h"
 #include "Core.h"

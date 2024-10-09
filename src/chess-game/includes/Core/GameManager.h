@@ -12,19 +12,14 @@ public:
 private:
 	void CreatePawnsRow(PieceColor color, int row);
 	void PlayRound();
-	void DrawBoard();
 
 private:
 	GameManager();
 	static GameManager* s_instance;
 
-	Board* m_board;
+	Renderer* m_p_renderer;
+
+	Board* m_p_board;
 	bool m_is_game_over;
-	const std::unordered_map<std::type_index, char> m_pieces_display_map = {
-		{std::type_index(typeid(Pawn)), 'P'},
-		{std::type_index(typeid(Rook)), 'R'},
-		{std::type_index(typeid(Knight)), 'K'},
-		{std::type_index(typeid(Bishop)), 'B'}
-	};
 };
 

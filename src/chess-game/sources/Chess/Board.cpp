@@ -2,8 +2,8 @@
 
 Board::Board()
 {
-	m_board_width = BOARD_WIDTH;
-	m_board_height = BOARD_HEIGHT;
+	m_grid_width = BOARD_WIDTH;
+	m_grid_height = BOARD_HEIGHT;
 	for (int i = 0; i < BOARD_SIZE; i++) {
 		m_grid[i] = nullptr;
 	}

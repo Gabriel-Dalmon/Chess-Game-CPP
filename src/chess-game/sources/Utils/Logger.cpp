@@ -17,9 +17,11 @@ int Logger::Initialize(const char* log_output_path, LoggerModes mode)
 
 void Logger::Release()
 {
-	m_p_file->Release();
-	delete m_p_file;
-	m_p_file = nullptr;
+	if (m_p_file != nullptr) {
+		m_p_file->Release();
+		delete m_p_file;
+		m_p_file = nullptr;
+	}
 }
 
 void Logger::Log(const char* log_data)
