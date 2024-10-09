@@ -1,0 +1,4 @@
+[submodule "externals"]
+	path = externals
+	url = https://github.com/Gabriel-Dalmon/Chess-Game-CPP.git
+	branch = externals
