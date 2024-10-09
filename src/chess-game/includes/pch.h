@@ -12,6 +12,15 @@
 #define RESOURCES_PATH "./"
 #endif
 
+#ifdef _SFML_VERSION
+#define INCLUDE_SFML
+namespace sfmlw {
+	struct Empty { int x = 0; };
+}
+namespace graphics_namespace = sfmlw;
+#endif
+
+
 // Includes
 #include "Utilities.h"
 #include "Graphics.h"

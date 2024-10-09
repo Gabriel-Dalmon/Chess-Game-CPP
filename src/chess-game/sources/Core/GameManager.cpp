@@ -10,7 +10,7 @@ GameManager& GameManager::instance()
 	return *s_instance;
 }
 
-GameManager::GameManager() : m_p_renderer(nullptr), m_p_board(nullptr), m_is_game_over(false)
+GameManager::GameManager() : /*m_p_renderer(nullptr),*/ m_p_board(nullptr), m_is_game_over(false)
 {
 }
 
@@ -20,8 +20,8 @@ GameManager::~GameManager()
 
 int GameManager::Initialize()
 {
-	m_p_renderer = new Renderer();
-	m_p_renderer->Initialize();
+	// m_p_renderer = new Renderer();
+	// m_p_renderer->Initialize();
 	m_p_board = new Board();
 	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, 0, BOARD_HEIGHT - 1);
 	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, BOARD_WIDTH - 1, BOARD_HEIGHT - 1);
@@ -45,7 +45,7 @@ int GameManager::Run()
 {
 	while(m_is_game_over == false)
 	{
-		m_p_renderer->Render(*m_p_board);
+		//m_p_renderer->Render(*m_p_board);
 		PlayRound();
 	}
 	return 0;
@@ -91,7 +91,7 @@ void GameManager::PlayRound()
 		MoveInfo* p_move = m_p_board->Move(start_position, destination_position);
 		if (p_move == nullptr)
 		{
-			m_p_renderer->Render(*m_p_board);
+			//m_p_renderer->Render(*m_p_board);
 			std::cout << "Invalid move. Try again." << std::endl;
 			continue;
 		}
