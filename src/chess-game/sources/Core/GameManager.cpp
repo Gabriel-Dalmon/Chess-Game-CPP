@@ -1,7 +1,9 @@
 #include "pch.h"
 
+//------------------------------------------------------------------------------
 GameManager* GameManager::s_instance = nullptr;
 
+//------------------------------------------------------------------------------
 GameManager& GameManager::instance()
 {
 	if (!s_instance) {
@@ -10,25 +12,32 @@ GameManager& GameManager::instance()
 	return *s_instance;
 }
 
-GameManager::GameManager() : /*m_p_renderer(nullptr),*/ m_p_board(nullptr), m_is_game_over(false)
+//------------------------------------------------------------------------------
+GameManager::GameManager() : /*m_p_renderer(nullptr),*/ m_p_board(nullptr),
+	m_is_game_over(false)
 {
 }
 
+//------------------------------------------------------------------------------
 GameManager::~GameManager()
 {
 }
 
+//------------------------------------------------------------------------------
 int GameManager::Initialize()
 {
 	// m_p_renderer = new Renderer();
 	// m_p_renderer->Initialize();
 	m_p_board = new Board();
 	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, 0, BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, BOARD_WIDTH - 1, BOARD_HEIGHT - 1);
+	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, BOARD_WIDTH - 1,
+		BOARD_HEIGHT - 1);
 	m_p_board->CreatePiece<Knight>(PieceColor::WHITE, 1, BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Knight>(PieceColor::WHITE, BOARD_WIDTH - 2, BOARD_HEIGHT - 1);
+	m_p_board->CreatePiece<Knight>(PieceColor::WHITE, BOARD_WIDTH - 2,
+		BOARD_HEIGHT - 1);
 	m_p_board->CreatePiece<Bishop>(PieceColor::WHITE, 2, BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Bishop>(PieceColor::WHITE, BOARD_WIDTH - 3, BOARD_HEIGHT - 1);
+	m_p_board->CreatePiece<Bishop>(PieceColor::WHITE, BOARD_WIDTH - 3,
+		BOARD_HEIGHT - 1);
 	CreatePawnsRow(PieceColor::WHITE, BOARD_HEIGHT - 2);
 
 	m_p_board->CreatePiece<Rook>(PieceColor::BLACK, 0, 0);
@@ -41,6 +50,7 @@ int GameManager::Initialize()
 	return 0;
 }
 
+//------------------------------------------------------------------------------
 int GameManager::Run()
 {
 	while(m_is_game_over == false)
@@ -51,6 +61,7 @@ int GameManager::Run()
 	return 0;
 }
 
+//------------------------------------------------------------------------------
 void GameManager::Release()
 {
 	if (m_p_board != nullptr)
@@ -61,6 +72,7 @@ void GameManager::Release()
 	}
 }
 
+//------------------------------------------------------------------------------
 void GameManager::CreatePawnsRow(PieceColor color, int row)
 {
 	for (int column = 0; column < BOARD_WIDTH; column++)
@@ -70,6 +82,7 @@ void GameManager::CreatePawnsRow(PieceColor color, int row)
 	return;
 }
 
+//------------------------------------------------------------------------------
 void GameManager::PlayRound()
 {
 	bool is_valid_move = true;
@@ -88,7 +101,8 @@ void GameManager::PlayRound()
 
 		system("cls");
 
-		MoveInfo* p_move = m_p_board->Move(start_position, destination_position);
+		MoveInfo* p_move =
+			m_p_board->Move(start_position, destination_position);
 		if (p_move == nullptr)
 		{
 			//m_p_renderer->Render(*m_p_board);

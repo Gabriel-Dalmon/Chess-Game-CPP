@@ -22,6 +22,7 @@ namespace log_version_globals {
 	extern Logger logger;
 }
 
+//------------------------------------------------------------------------------
 #define CREATE_LOGGER(file_path) log_version_globals::isInitialized = (log_version_globals::logger.Initialize(std::move(file_path), LoggerMode::KEEP_LOG_OPENED) == 0);
 
 #define LOG(log_data)	if(log_version_globals::isInitialized == false) [[unlikely]] CREATE_LOGGER(const_cast<char*>("log.txt")); \

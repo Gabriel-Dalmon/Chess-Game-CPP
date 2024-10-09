@@ -1,5 +1,6 @@
 #include "pch.h"
 
+//------------------------------------------------------------------------------
 Board::Board()
 {
 	m_grid_width = BOARD_WIDTH;
@@ -10,15 +11,18 @@ Board::Board()
 	m_en_passant_piece = nullptr;
 }
 
+//------------------------------------------------------------------------------
 Board::~Board()
 {
 }
 
+//------------------------------------------------------------------------------
 int Board::Initialize()
 {
 	return 0;
 }
 
+//------------------------------------------------------------------------------
 void Board::Release()
 {
 	for (int i = 0; i < BOARD_SIZE; i++) {
@@ -30,6 +34,7 @@ void Board::Release()
 	}
 }
 
+//------------------------------------------------------------------------------
 MoveInfo* Board::Move(int start_position[2], int destination_position[2])
 {
 	const int piece_index = Helper::GetSquareIndex(start_position, BOARD_WIDTH);
@@ -37,9 +42,11 @@ MoveInfo* Board::Move(int start_position[2], int destination_position[2])
 	if (p_piece == nullptr) return nullptr;
 
 	const APiece& piece = *p_piece;
-	MovableType isMovable = piece.IsMovable(*this, start_position, destination_position);
+	MovableType isMovable = piece.IsMovable(*this, start_position,
+		destination_position);
 
-	const int destination_index = destination_position[0] + destination_position[1] * BOARD_WIDTH;
+	const int destination_index = 
+		destination_position[0] + destination_position[1] * BOARD_WIDTH;
 	MoveInfo* p_move = new MoveInfo();
 
 	switch (isMovable) {
@@ -60,6 +67,4 @@ MoveInfo* Board::Move(int start_position[2], int destination_position[2])
 		break;
 	}
 	return p_move;
-
-	
 }
