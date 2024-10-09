@@ -21,21 +21,25 @@ namespace sfmlw {}
 namespace graphics_wrapper {
 	using namespace sfmlw;
 }
+using namespace sfmlw;
 #elif defined(_GDI_VERSION)
 #define INCLUDE_GDI
 namespace gdiw {}
 namespace graphics_namespace {
 	using namespace gdiw;
 }
+using namespace gdiw;
 #else
 #define INCLUDE_CONSOLE
 namespace consolew {}
 namespace graphics_namespace {
 	using namespace consolew;
 }
+using namespace consolew;
 #endif
 
 //------------------------------------------------------------------------------
+/* Define the path to the resources folder */
 #ifdef _DEBUG
 #define RESOURCES_PATH "../../../res/"
 #else
@@ -45,6 +49,6 @@ namespace graphics_namespace {
 //------------------------------------------------------------------------------
 /* Includes */
 #include "Utilities.h"
-#include "Graphics.h"
 #include "Chess.h"
+#include "Graphics.h"
 #include "Core.h"

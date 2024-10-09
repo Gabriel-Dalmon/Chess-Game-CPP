@@ -13,7 +13,7 @@ GameManager& GameManager::instance()
 }
 
 //------------------------------------------------------------------------------
-GameManager::GameManager() : /*m_p_renderer(nullptr),*/ m_p_board(nullptr),
+GameManager::GameManager() : m_p_renderer(nullptr), m_p_board(nullptr),
 	m_is_game_over(false)
 {
 }
@@ -26,8 +26,9 @@ GameManager::~GameManager()
 //------------------------------------------------------------------------------
 int GameManager::Initialize()
 {
-	// m_p_renderer = new Renderer();
-	// m_p_renderer->Initialize();
+	m_p_renderer = new Renderer();
+	m_p_renderer->Initialize();
+
 	m_p_board = new Board();
 	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, 0, BOARD_HEIGHT - 1);
 	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, BOARD_WIDTH - 1,
@@ -79,6 +80,20 @@ void GameManager::CreatePawnsRow(PieceColor color, int row)
 	{
 		m_p_board->CreatePiece<Pawn>(color, column, row);
 	}
+	return;
+}
+
+//------------------------------------------------------------------------------
+void GameManager::CreateMajorPiecesRow(PieceColor color, int row)
+{
+	m_p_board->CreatePiece<Rook>(color, 0, row);
+	m_p_board->CreatePiece<Rook>(color, BOARD_WIDTH - 1, row);
+	m_p_board->CreatePiece<Knight>(color, 1, 0);
+	m_p_board->CreatePiece<Knight>(color, BOARD_WIDTH - 2, row);
+	m_p_board->CreatePiece<Bishop>(color, 2, 0);
+	m_p_board->CreatePiece<Bishop>(color, BOARD_WIDTH - 3, row);
+	m_p_board->CreatePiece<Queen>(color, 3, row);
+	m_p_board->CreatePiece<King>(color, 4, row);
 	return;
 }
 

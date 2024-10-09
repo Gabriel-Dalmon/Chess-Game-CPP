@@ -1,21 +1,21 @@
 #pragma once
-#ifdef INCLUDE_SFML
+#ifdef _SFML_VERSION
 
 //------------------------------------------------------------------------------
 namespace sfmlw {
 
 //------------------------------------------------------------------------------
-class Renderer {
+class Window {
 public:
-	Renderer();
-	~Renderer();
+	Window();
+	~Window();
 
-	int Initialize();
+	int Initialize(const int size[2], const char* title);
 	void Release();
 
-	void Render(const Board& board);
+//------------------------------------------------------------------------------
 private:
-	Window* p_window;
+	sf::RenderWindow m_window;
 };
 
 }
