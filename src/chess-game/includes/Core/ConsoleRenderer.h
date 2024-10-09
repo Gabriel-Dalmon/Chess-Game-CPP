@@ -1,6 +1,7 @@
 #pragma once
 #if (defined(_SFML_VERSION) || defined(_GDI_VERSION)) == false
 
+//------------------------------------------------------------------------------
 class ConsoleRenderer {
 public:
 	ConsoleRenderer();

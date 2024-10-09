@@ -1,9 +1,11 @@
 #pragma once
 
-using Byte = unsigned char;
 
+
+//------------------------------------------------------------------------------
 class File {
 public:
+	using Byte = unsigned char;
 	File();
 
 	bool Open(const char* path, const char* openMode);

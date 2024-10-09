@@ -1,22 +1,28 @@
 #include "pch.h"
+
 #if (defined(_SFML_VERSION) || defined(_GDI_VERSION)) == false
+
+//------------------------------------------------------------------------------
 ConsoleRenderer::ConsoleRenderer()
 {
 }
-
+//------------------------------------------------------------------------------
 ConsoleRenderer::~ConsoleRenderer()
 {
 }
 
+//------------------------------------------------------------------------------
 int ConsoleRenderer::Initialize()
 {
 	return 0;
 }
 
+//------------------------------------------------------------------------------
 void ConsoleRenderer::Release()
 {
 }
 
+//------------------------------------------------------------------------------
 void ConsoleRenderer::Render(const Board& board)
 {
 	const APiece* const* grid = board.GetGrid();
@@ -39,8 +45,12 @@ void ConsoleRenderer::Render(const Board& board)
 			}
 			else
 			{
-				char piece_display = m_pieces_display_map.at(std::type_index(p_piece->GetType()));
-				const char* color = p_piece->GetColor() == PieceColor::WHITE ? m_green_color : m_purple_color;
+				char piece_display = m_pieces_display_map.at(
+					std::type_index(p_piece->GetType()));
+				const char* color = 
+					p_piece->GetColor() == PieceColor::WHITE
+					? m_green_color 
+					: m_purple_color;
 				std::cout << color << piece_display << m_reset_color;
 			}
 			std::cout << (column == BOARD_WIDTH - 1 ? "|" : " ");

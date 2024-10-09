@@ -1,6 +1,7 @@
 #pragma once
 #ifdef _SFML_VERSION
 
+//------------------------------------------------------------------------------
 class Window {
 	Window();
 	~Window();

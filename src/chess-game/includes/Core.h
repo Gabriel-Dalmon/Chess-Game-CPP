@@ -1,18 +1,26 @@
 #pragma once
 
-// External includes
+//------------------------------------------------------------------------------
+/* External includes */
 #include <iostream>
 #include <unordered_map>
 #include <typeindex>
 #include <typeinfo> 
 
-//Forward declarations
-namespace graphics_namespace {
+//------------------------------------------------------------------------------
+/* Forward declarations 
+* 
+* graphics_wrapper is a namespace alias for graphic libraries wrapper objects 
+* that adapts to the namespace used by the loaded wrappers. */
+//------------------------------------------------------------------------------
+namespace graphics_wrapper {
 	class Renderer;
 }
+
 class GameManager;
 
-// Includes
+//------------------------------------------------------------------------------
+/* Includes */
 #if defined(_SFML_VERSION)
 #include "Core/Renderer.h"
 using namespace sfmlw;

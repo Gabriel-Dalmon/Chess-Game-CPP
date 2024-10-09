@@ -1,11 +1,13 @@
 #include "pch.h"
 
+//------------------------------------------------------------------------------
 File::File() {
 	m_size = 0;
 	m_path = "";
 	m_pFile = nullptr;
 }
 
+//------------------------------------------------------------------------------
 bool File::Open(const char* path, const char* openMode) {
 	m_pFile = nullptr;
 	m_path = path;
@@ -19,6 +21,7 @@ bool File::Open(const char* path, const char* openMode) {
 	return true;
 }
 
+//------------------------------------------------------------------------------
 bool File::Open(const wchar_t* path, const wchar_t* openMode) {
 	//m_path = path;  wcstombs_s((size_t)0, m_path, path, (size_t)_TRUNCATE);
 	_wfopen_s(&m_pFile, path, openMode);
@@ -31,10 +34,12 @@ bool File::Open(const wchar_t* path, const wchar_t* openMode) {
 	return true;
 }
 
+//------------------------------------------------------------------------------
 long int File::GetSize() {
 	return m_size;
 }
 
+//------------------------------------------------------------------------------
 void File::Read(Byte* buffer) {
 	if (m_pFile != nullptr) {
 		fseek(m_pFile, 0, SEEK_SET);
@@ -42,6 +47,7 @@ void File::Read(Byte* buffer) {
 	}
 }
 
+//------------------------------------------------------------------------------
 void File::ReadChunk(Byte* buffer, int size)
 {
 	if (m_pFile != nullptr) {
@@ -49,6 +55,7 @@ void File::ReadChunk(Byte* buffer, int size)
 	}
 }
 
+//------------------------------------------------------------------------------
 void File::Write(Byte* buffer, int size) {
 	m_size += size;
 	if (m_pFile != nullptr) {
@@ -56,11 +63,13 @@ void File::Write(Byte* buffer, int size) {
 	}
 }
 
+//------------------------------------------------------------------------------
 void File::SetCursor(long offset, int mode)
 {
 	fseek(m_pFile, offset, mode);
 }
 
+//------------------------------------------------------------------------------
 void File::Close() {
 	if (m_pFile != nullptr) {
 		fclose(m_pFile);
@@ -68,6 +77,7 @@ void File::Close() {
 	}
 }
 
+//------------------------------------------------------------------------------
 void File::Release()
 {
 	Close();

@@ -1,13 +1,16 @@
 #include "pch.h"
 
+//------------------------------------------------------------------------------
 Logger::Logger() : m_p_file(nullptr)
 {
 }
 
+//------------------------------------------------------------------------------
 Logger::~Logger()
 {
 }
 
+//------------------------------------------------------------------------------
 int Logger::Initialize(const char* log_output_path, LoggerModes mode)
 {
 	m_p_file = new File();
@@ -15,6 +18,7 @@ int Logger::Initialize(const char* log_output_path, LoggerModes mode)
 	return 0;
 }
 
+//------------------------------------------------------------------------------
 void Logger::Release()
 {
 	if (m_p_file != nullptr) {
@@ -24,6 +28,7 @@ void Logger::Release()
 	}
 }
 
+//------------------------------------------------------------------------------
 void Logger::Log(const char* log_data)
 {
 	size_t data_length = strlen(log_data);
