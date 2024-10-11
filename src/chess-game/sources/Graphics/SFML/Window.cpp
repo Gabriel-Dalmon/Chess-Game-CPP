@@ -42,6 +42,11 @@ void Window::Draw(const sf::Drawable& drawable)
 	m_window.draw(drawable);
 }
 
+void Window::Clear(const sf::Color& color)
+{
+	m_window.clear(color);
+}
+
 //------------------------------------------------------------------------------
 void Window::Clear()
 {

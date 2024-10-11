@@ -14,6 +14,7 @@ public:
     void Release();
 
     void Draw(const sf::Drawable& drawable);
+    void Clear(const sf::Color& color);
     void Clear();
 
     inline unsigned int GetWidth() const { return m_window.getSize().x; };

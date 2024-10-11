@@ -5,7 +5,7 @@
 class __declspec(novtable) APiece {
 public:
 	APiece(const std::type_info& type_info);
-	virtual ~APiece() {};
+	virtual ~APiece() = 0;
 
 	int Initialize(PieceColor color);
 	virtual void Release() = 0;

@@ -1,17 +1,23 @@
-#pragma once
+#include "pch.h"
 
 //------------------------------------------------------------------------------
-/* External includes */
-#include <iostream>
-#include <unordered_map>
-#include <typeindex>
-#include <typeinfo> 
+sfmlw::Clock::Clock() : m_clock()
+{
+}
 
 //------------------------------------------------------------------------------
-/* Forward declarations */
-class EventsManager;
-class GameManager;
+sfmlw::Clock::~Clock()
+{
+}
 
 //------------------------------------------------------------------------------
-/* Includes */
-#include "Core/GameManager.h"
+int sfmlw::Clock::Initialize()
+{
+	return 0;
+}
+
+//------------------------------------------------------------------------------
+void sfmlw::Clock::Release()
+{
+
+}

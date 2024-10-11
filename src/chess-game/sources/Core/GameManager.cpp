@@ -43,7 +43,7 @@ int GameManager::Run()
 {
 	while(m_is_game_over == false)
 	{
-		//m_p_renderer->Render(*m_p_board);
+		m_renderer.Render(*m_p_board);
 		PlayRound();
 	}
 	return 0;
@@ -122,4 +122,10 @@ void GameManager::PlayRound()
 		is_valid_move = false;
 	} while (is_valid_move);
 	return;
+}
+
+void GameManager::UpdateDeltaTime()
+{
+	m_delta_time = m_clock.GetElapsedTime();
+	m_clock.Reset();
 }

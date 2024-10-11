@@ -1,4 +1,5 @@
 #pragma once
+#ifdef _LOG
 
 //------------------------------------------------------------------------------
 typedef enum LoggerModes {
@@ -20,3 +21,5 @@ public:
 private:
 	File* m_p_file;
 };
+
+#endif

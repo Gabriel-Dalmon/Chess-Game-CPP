@@ -1,4 +1,5 @@
 #include "pch.h"
+#ifdef _LOG
 
 //------------------------------------------------------------------------------
 Logger::Logger() : m_p_file(nullptr)
@@ -41,3 +42,5 @@ void Logger::Log(const char* log_data)
 	size_t data_length = strlen(log_data);
 	m_p_file->Write((unsigned char*)log_data, data_length);
 }
+
+#endif

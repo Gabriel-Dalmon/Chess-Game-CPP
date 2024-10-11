@@ -18,14 +18,14 @@
 #if defined(_SFML_VERSION)
 #define INCLUDE_SFML
 namespace sfmlw {}
-namespace graphics_wrapper {
+namespace engine_wrapper {
 	using namespace sfmlw;
 }
 using namespace sfmlw;
 #elif defined(_GDI_VERSION)
 #define INCLUDE_GDI
 namespace gdiw {}
-namespace graphics_namespace {
+namespace engine_wrapper {
 	using namespace gdiw;
 }
 using namespace gdiw;
@@ -51,4 +51,5 @@ using namespace consolew;
 #include "Utilities.h"
 #include "Chess.h"
 #include "Graphics.h"
+#include "Events.h"
 #include "Core.h"

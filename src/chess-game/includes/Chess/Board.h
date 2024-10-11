@@ -25,8 +25,8 @@ public:
 	//--------------------------------------------------------------------------
 	// Getters/Setters
 	const APiece* const* GetGrid() const { return m_grid; };
-	inline const int& GetGridWidth() const { return m_grid_width; };
-	inline const int& GetGridHeight() const { return m_grid_height; };
+	inline int GetGridWidth() const { return m_grid_width; };
+	inline int GetGridHeight() const { return m_grid_height; };
 
 //------------------------------------------------------------------------------
 private:

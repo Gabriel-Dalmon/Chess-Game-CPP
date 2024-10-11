@@ -1,21 +1,53 @@
 #pragma once
 
+//------------------------------------------------------------------------------
 // External Includes
+#if defined(_SFML_VERSION)
+#include <SFML/System/Time.hpp>
+#include <SFML/System/Clock.hpp>
+#elif defined(_GDI_VERSION)
+#else
+#endif
+
 #include <stdio.h>
 
+//------------------------------------------------------------------------------
 // Forward declarations
+#ifdef _LOG
+class Logger
+#endif
+namespace engine_wrapper {
+	class Clock;
+}
+
 class File;
-class Logger;
 class Helper;
 
-// Includes
-#include "Utilities/File.h"
+//------------------------------------------------------------------------------
+/* Includes */
+//------------------------------------------------------------------------------
+#ifdef _LOG
 #include "Utilities/Logger.h"
+#endif
+
+//------------------------------------------------------------------------------
+#if defined(_SFML_VERSION)
+#include "Utilities/SFML/Clock.h"
+#elif defined(_GDI_VERSION)
+#include "Utilities/GDI/Clock.h"
+#else
+#include "Utilities/Console/Clock.h"
+#endif
+
+//------------------------------------------------------------------------------
+#include "Utilities/File.h"
 #include "Utilities/Helper.h"
 
+//------------------------------------------------------------------------------
 #ifdef _LOG
 #include "Utilities/Logger.h"
 
+//------------------------------------------------------------------------------
 namespace log_version_globals {
 	// Declared in Utilities.cpp.
 	extern bool isInitialized;

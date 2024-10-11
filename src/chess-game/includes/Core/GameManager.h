@@ -13,6 +13,7 @@ private:
 	void CreatePawnsRow(PieceColor color, int row);
 	void CreateMajorPiecesRow(PieceColor color, int row);
 	void PlayRound();
+	void UpdateDeltaTime();
 
 private:
 	GameManager();
@@ -22,5 +23,7 @@ private:
 
 	Board* m_p_board;
 	bool m_is_game_over;
+	Clock m_clock;
+	uint32_t m_delta_time = 0;
 };
 

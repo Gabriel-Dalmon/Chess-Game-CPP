@@ -1,6 +1,6 @@
 #pragma once
 
-class Sprite : public Shape {
+class Sprite {
 public:
 	Sprite();
 	~Sprite();

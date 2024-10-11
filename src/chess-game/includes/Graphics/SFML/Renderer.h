@@ -15,9 +15,11 @@ public:
 
 	void Render(const Board& board);
 private:
-	Window window;
+	Window m_window;
 	Sprite* m_piece_sprites[9];
-	Shape* m_tile;
+	SquareShape* m_dark_tile;
+	sf::Color m_board_color_light;
+	sf::Color m_board_color_dark;
 };
 
 }

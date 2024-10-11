@@ -9,8 +9,9 @@ bool File::Open(const char* path, const char* openMode) {
 	m_pFile = nullptr;
 	delete[] m_path;
 
-	m_path = new char[std::strlen(path) + 1];
-	std::strcpy(m_path, path);
+	size_t path_length = std::strlen(path) + 1;
+	m_path = new char[path_length];
+	memcpy_s(m_path, path_length, path, path_length);
 	
 	fopen_s(&m_pFile, m_path, openMode);
 	if (m_pFile == nullptr) {
