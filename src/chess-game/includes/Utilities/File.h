@@ -27,7 +27,7 @@ public:
 	~File() {};
 
 private:
-	const char* m_path;
+	char* m_path;
 	long int m_size;
 	FILE* m_pFile;
 };

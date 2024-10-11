@@ -1,17 +1,18 @@
 #include "pch.h"
 
 //------------------------------------------------------------------------------
-File::File() {
-	m_size = 0;
-	m_path = "";
-	m_pFile = nullptr;
+File::File() : m_size(0), m_path(nullptr), m_pFile(nullptr) {
 }
 
 //------------------------------------------------------------------------------
 bool File::Open(const char* path, const char* openMode) {
 	m_pFile = nullptr;
-	m_path = path; // should use strcpy_s
-	fopen_s(&m_pFile, path, openMode);
+	delete[] m_path;
+
+	m_path = new char[std::strlen(path) + 1];
+	std::strcpy(m_path, path);
+	
+	fopen_s(&m_pFile, m_path, openMode);
 	if (m_pFile == nullptr) {
 		return false;
 	}
