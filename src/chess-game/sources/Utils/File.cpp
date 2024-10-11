@@ -26,6 +26,7 @@ bool File::Open(const char* path, const char* openMode) {
 bool File::Open(char*&& path, const char* openMode)
 {
 	m_pFile = nullptr;
+	delete[] m_path;
 	m_path = path;
 	path = nullptr;
 
