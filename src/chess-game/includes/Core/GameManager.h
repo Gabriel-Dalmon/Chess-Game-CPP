@@ -17,7 +17,8 @@ private:
 private:
 	GameManager();
 	static GameManager* s_instance;
-	Renderer* m_p_renderer;
+	Renderer m_renderer;
+	EventsManager m_events_manager;
 
 	Board* m_p_board;
 	bool m_is_game_over;

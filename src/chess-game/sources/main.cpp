@@ -12,7 +12,7 @@ int main()
 	gameManager.Initialize();
 	gameManager.Run();
 	gameManager.Release();
-
+	auto a = 1 <=> 2;
 	//-------------------------------------------------------------------------
 	DESTROY_LOGGER();
 #ifdef _DEBUG

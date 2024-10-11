@@ -9,8 +9,10 @@
 
 //------------------------------------------------------------------------------
 /* Forward declarations */
+class EventsManager;
 class GameManager;
 
 //------------------------------------------------------------------------------
 /* Includes */
+#include "Core/EventsManager.h"
 #include "Core/GameManager.h"

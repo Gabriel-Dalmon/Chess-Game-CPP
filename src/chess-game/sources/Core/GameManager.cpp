@@ -13,8 +13,7 @@ GameManager& GameManager::instance()
 }
 
 //------------------------------------------------------------------------------
-GameManager::GameManager() : m_p_renderer(nullptr), m_p_board(nullptr),
-	m_is_game_over(false)
+GameManager::GameManager() : m_renderer(), m_events_manager(), m_p_board(nullptr), m_is_game_over(false)
 {
 }
 
@@ -26,27 +25,15 @@ GameManager::~GameManager()
 //------------------------------------------------------------------------------
 int GameManager::Initialize()
 {
-	m_p_renderer = new Renderer();
-	m_p_renderer->Initialize();
+	m_renderer.Initialize();
+	m_events_manager.Initialize();
 
 	m_p_board = new Board();
-	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, 0, BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Rook>(PieceColor::WHITE, BOARD_WIDTH - 1,
-		BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Knight>(PieceColor::WHITE, 1, BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Knight>(PieceColor::WHITE, BOARD_WIDTH - 2,
-		BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Bishop>(PieceColor::WHITE, 2, BOARD_HEIGHT - 1);
-	m_p_board->CreatePiece<Bishop>(PieceColor::WHITE, BOARD_WIDTH - 3,
-		BOARD_HEIGHT - 1);
-	CreatePawnsRow(PieceColor::WHITE, BOARD_HEIGHT - 2);
+	m_p_board->Initialize();
 
-	m_p_board->CreatePiece<Rook>(PieceColor::BLACK, 0, 0);
-	m_p_board->CreatePiece<Rook>(PieceColor::BLACK, BOARD_WIDTH - 1, 0);
-	m_p_board->CreatePiece<Knight>(PieceColor::BLACK, 1, 0);
-	m_p_board->CreatePiece<Knight>(PieceColor::BLACK, BOARD_WIDTH - 2, 0);
-	m_p_board->CreatePiece<Bishop>(PieceColor::BLACK, 2, 0);
-	m_p_board->CreatePiece<Bishop>(PieceColor::BLACK, BOARD_WIDTH - 3, 0);
+	CreateMajorPiecesRow(PieceColor::WHITE, BOARD_HEIGHT - 1);
+	CreatePawnsRow(PieceColor::WHITE, BOARD_HEIGHT - 2);
+	CreateMajorPiecesRow(PieceColor::BLACK, 0);
 	CreatePawnsRow(PieceColor::BLACK, 1);
 	return 0;
 }
@@ -71,6 +58,8 @@ void GameManager::Release()
 		delete m_p_board;
 		m_p_board = nullptr;
 	}
+	m_renderer.Release();
+	m_events_manager.Release();
 }
 
 //------------------------------------------------------------------------------

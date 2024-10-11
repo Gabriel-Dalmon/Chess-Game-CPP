@@ -1,5 +1,6 @@
 #include "pch.h"
 
+namespace sfmlw {
 //------------------------------------------------------------------------------
 Window::Window()
 {
@@ -11,7 +12,7 @@ Window::~Window()
 }
 
 //------------------------------------------------------------------------------
-int Window::Initialize(const int size[2], const char* title)
+int Window::Initialize(const unsigned int size[2], const char* title)
 {
 	//--------------------------------------------------------------------------
 	/* Currently purposedly didn't initialize m_window in constructor, safer 
@@ -33,4 +34,18 @@ void Window::Release()
 {
 	m_window.close();
 	m_window.~RenderWindow();
+}
+
+//------------------------------------------------------------------------------
+void Window::Draw(const sf::Drawable& drawable)
+{
+	m_window.draw(drawable);
+}
+
+//------------------------------------------------------------------------------
+void Window::Clear()
+{
+	m_window.clear();
+}
+
 }
