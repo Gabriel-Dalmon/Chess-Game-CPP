@@ -9,6 +9,7 @@ public:
 	File();
 
 	bool Open(const char* path, const char* openMode);
+	bool Open(char*&& path, const char* openMode);
 	bool Open(const wchar_t* path, const wchar_t* openMode);
 
 	long int GetSize();

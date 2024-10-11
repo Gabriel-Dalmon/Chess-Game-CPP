@@ -18,6 +18,13 @@ int Logger::Initialize(const char* log_output_path, LoggerModes mode)
 	return 0;
 }
 
+int Logger::Initialize(const char*&& log_output_path, LoggerModes mode)
+{
+	m_p_file = new File();
+	if (m_p_file->Open(log_output_path, "wb+") == false) return 1;
+	return 0;
+}
+
 //------------------------------------------------------------------------------
 void Logger::Release()
 {

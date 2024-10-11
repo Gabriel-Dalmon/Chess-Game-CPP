@@ -10,7 +10,7 @@ File::File() {
 //------------------------------------------------------------------------------
 bool File::Open(const char* path, const char* openMode) {
 	m_pFile = nullptr;
-	m_path = path;
+	m_path = path; // should use strcpy_s
 	fopen_s(&m_pFile, path, openMode);
 	if (m_pFile == nullptr) {
 		return false;
@@ -18,6 +18,24 @@ bool File::Open(const char* path, const char* openMode) {
 	fseek(m_pFile, 0, SEEK_END);
 	m_size = ftell(m_pFile);
 	fseek(m_pFile, 0, SEEK_SET);
+	return true;
+}
+
+//------------------------------------------------------------------------------
+bool File::Open(char*&& path, const char* openMode)
+{
+	m_pFile = nullptr;
+	m_path = path;
+	path = nullptr;
+
+	fopen_s(&m_pFile, path, openMode);
+	if (m_pFile == nullptr) {
+		return false;
+	}
+	fseek(m_pFile, 0, SEEK_END);
+	m_size = ftell(m_pFile);
+	fseek(m_pFile, 0, SEEK_SET);
+	return true;
 	return true;
 }
 

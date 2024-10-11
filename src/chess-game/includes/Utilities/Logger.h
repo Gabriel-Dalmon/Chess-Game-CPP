@@ -12,6 +12,7 @@ public:
 	~Logger();
 
 	int Initialize(const char* log_output_path, LoggerModes mode);
+	int Initialize(const char*&& log_output_path, LoggerModes mode);
 	void Release();
 
 	void Log(const char* log_data);
